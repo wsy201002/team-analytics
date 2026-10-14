@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>班组生存分析 - Survival Analysis by Team</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+    <style>
+        body { font-family: 'Microsoft YaHei', sans-serif; margin: 0; padding: 20px; background: #f5f9f0; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        h1 { text-align: center; color: #2D5016; margin-bottom: 5px; }
+        h2 { color: #3A6B1E; margin: 20px 0 10px 0; font-size: 18px; border-left: 4px solid #5CA83E; padding-left: 10px; }
+        .chart { background: white; border-radius: 12px; padding: 15px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .chart-box { width: 100%; height: 500px; }
+        .chart-box-sm { width: 100%; height: 400px; }
+        .info-box { background: #f0fde0; border: 1px solid #B8EB90; border-radius: 8px; padding: 12px 16px; margin-bottom: 15px; font-size: 14px; color: #2D5016; }
+        .info-box strong { color: #1a3a0a; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+        th, td { padding: 6px 10px; border: 1px solid #e0e8d8; text-align: center; }
+        th { background: #E8FCC8; color: #2D5016; }
+        td:first-child { text-align: left; font-weight: 500; }
+        .heatmap-cell { min-width: 50px; height: 28px; }
+        .legend { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; justify-content: center; }
+        .legend-item { display: flex; align-items: center; gap: 4px; font-size: 12px; }
+        .legend-color { width: 16px; height: 16px; border-radius: 3px; }
+        .footer { text-align: center; color: #888; font-size: 12px; margin-top: 20px; padding: 10px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>班组人员生存分析全景图</h1>
+    <p style="text-align:center;color:#666;font-size:14px;">分析日期：2026年10月14日 | 数据来源：111.xlsx</p>
+    
+    <div class="info-box">
+        <strong>分析说明：</strong>基于367名员工的入职时间数据，按班组统计各 tenure 区间的在岗人员分布。
+        「生存分析」在此指员工在各入职时间段后的持续在岗率，反映班组人员稳定性与结构健康度。
+    </div>
+    
+    <h2>一、班组人员 Tenure 分布（堆叠柱状图）— Top 15 班组</h2>
+    <div class="chart"><div id="chart1" class="chart-box"></div></div>
+    
+    <h2>二、班组 Kaplan-Meier 生存曲线 — Top 8 班组</h2>
+    <div class="info-box">
+        <strong>生存曲线解读：</strong>横轴为入职后月数，纵轴为「仍在职比例(%)」。曲线越平缓说明人员流失越少、团队越稳定。
+        由于当前数据中所有员工状态均为「在职」，曲线反映的是各班组员工的 tenure 累积分布。
+    </div>
+    <div class="chart"><div id="chart2" class="chart-box"></div></div>
+    
+    <h2>三、班组 Tenure 热力图</h2>
+    <div class="chart"><div id="chart3" class="chart-box-sm"></div></div>
+    
+    <h2>四、班组统计摘要表</h2>
+    <div class="chart" style="overflow-x:auto;">
+        <table>
+            <tr><th>班组</th><th>总人数</th><th>中位入职月数</th><th>0-6月新人占比</th><th>12月+老员工占比</th></tr>
+<tr><td>NX后加工-腻子批刮-A班</td><td>28</td><td>2月</td><td>57.1%</td><td>21.4%</td></tr>
+<tr><td>NX后加工-外包边-C班</td><td>26</td><td>5月</td><td>53.8%</td><td>30.8%</td></tr>
+<tr><td>NX后加工-外包边-B班</td><td>26</td><td>12月</td><td>34.6%</td><td>50.0%</td></tr>
+<tr><td>NX后加工-腻子批刮-B班</td><td>24</td><td>9月</td><td>50.0%</td><td>41.7%</td></tr>
+<tr><td>NX后加工-外包边-A班</td><td>24</td><td>13月</td><td>41.7%</td><td>50.0%</td></tr>
+<tr><td>NX后加工-腻子批刮-C班</td><td>23</td><td>3月</td><td>56.5%</td><td>21.7%</td></tr>
+<tr><td>生产部-NX-后道-腻子-F班</td><td>18</td><td>17月</td><td>0.0%</td><td>100.0%</td></tr>
+<tr><td>NX后加工-维修-C班</td><td>14</td><td>14月</td><td>21.4%</td><td>71.4%</td></tr>
+<tr><td>NX后加工-油漆-C班</td><td>13</td><td>10月</td><td>23.1%</td><td>38.5%</td></tr>
+<tr><td>NX后加工-维修-A班</td><td>13</td><td>16月</td><td>0.0%</td><td>100.0%</td></tr>
+<tr><td>生产部-NX-后道-腻子-E班</td><td>13</td><td>16月</td><td>0.0%</td><td>92.3%</td></tr>
+<tr><td>NX后加工-维修-B班</td><td>11</td><td>16月</td><td>36.4%</td><td>63.6%</td></tr>
+<tr><td>NX后加工-油漆-A班</td><td>11</td><td>17月</td><td>0.0%</td><td>81.8%</td></tr>
+<tr><td>NX后加工-油漆-B班</td><td>11</td><td>15月</td><td>9.1%</td><td>81.8%</td></tr>
+<tr><td>NX后加工-装配&配重入库-A班</td><td>10</td><td>18月</td><td>10.0%</td><td>90.0%</td></tr>
+<tr><td>NX后加工-装配&配重入库-E班</td><td>9</td><td>16月</td><td>0.0%</td><td>100.0%</td></tr>
+<tr><td>NX后加工-装配&配重入库-B班</td><td>9</td><td>15月</td><td>22.2%</td><td>77.8%</td></tr>
+<tr><td>生产部-NX-后道-V1 维修-B班</td><td>8</td><td>2月</td><td>75.0%</td><td>25.0%</td></tr>
+<tr><td>NX后加工-装配&配重入库-C班</td><td>8</td><td>10月</td><td>25.0%</td><td>37.5%</td></tr>
+<tr><td>生产部-NX-后道-V1 维修-A班</td><td>7</td><td>14月</td><td>42.9%</td><td>57.1%</td></tr>
+<tr><td>NX后加工-外包边-E班</td><td>6</td><td>29月</td><td>0.0%</td><td>100.0%</td></tr>
+<tr><td>生产部-NX-后道-包边-F班</td><td>6</td><td>40月</td><td>0.0%</td><td>100.0%</td></tr>
+<tr><td>NX后加工-装配&配重入库-F班</td><td>6</td><td>43月</td><td>0.0%</td><td>100.0%</td></tr>
+<tr><td>NX后加工-维修-F班</td><td>5</td><td>44月</td><td>0.0%</td><td>100.0%</td></tr>
+<tr><td>生产部-NX-后道-行车-C班</td><td>5</td><td>14月</td><td>0.0%</td><td>100.0%</td></tr>
+<tr><td>生产部-NX-后道-V1 维修-F班</td><td>5</td><td>17月</td><td>0.0%</td><td>100.0%</td></tr>
+<tr><td>生产部-NX-后道-行车-B班</td><td>5</td><td>18月</td><td>0.0%</td><td>100.0%</td></tr>
+<tr><td>生产部-NX-后道-V1 维修-C班</td><td>5</td><td>2月</td><td>80.0%</td><td>0.0%</td></tr>
+<tr><td>生产部-NX-后道-行车-A班</td><td>5</td><td>17月</td><td>0.0%</td><td>100.0%</td></tr>
+<tr><td>生产部-NX-后道-V1 维修-E班</td><td>4</td><td>16月</td><td>0.0%</td><td>100.0%</td></tr>
+<tr><td>NX后加工-维修-E班</td><td>3</td><td>42月</td><td>0.0%</td><td>100.0%</td></tr>
+
+        </table>
+    </div>
+    
+    <div class="footer">
+        生成时间：2026-10-14 10:39:42 | 分析工具：Hermes Agent
+    </div>
+</div>
+
+<script>
+// Chart 1: Stacked bar
+var chart1 = echarts.init(document.getElementById('chart1'));
+var categories = ["NX后加工-装配&配重入库-A班", "NX后加工-油漆-B班", "NX后加工-油漆-A班", "NX后加工-维修-B班", "生产部-NX-后道-腻子-E班", "NX后加工-维修-A班", "NX后加工-油漆-C班", "NX后加工-维修-C班", "生产部-NX-后道-腻子-F班", "NX后加工-腻子批刮-C班", "NX后加工-外包边-A班", "NX后加工-腻子批刮-B班", "NX后加工-外包边-B班", "NX后加工-外包边-C班", "NX后加工-腻子批刮-A班"];
+var seriesData = [{"name": "0-6月", "type": "bar", "stack": "total", "itemStyle": {"color": "#2D5016"}, "data": [1, 1, 0, 4, 0, 0, 3, 3, 0, 13, 10, 12, 9, 14, 16], "emphasis": {"focus": "series"}}, {"name": "6-12月", "type": "bar", "stack": "total", "itemStyle": {"color": "#3A6B1E"}, "data": [0, 1, 2, 0, 1, 0, 5, 1, 0, 5, 2, 2, 4, 4, 6], "emphasis": {"focus": "series"}}, {"name": "12-18月", "type": "bar", "stack": "total", "itemStyle": {"color": "#4A8B2C"}, "data": [4, 5, 5, 4, 6, 13, 4, 8, 10, 4, 10, 4, 9, 7, 4], "emphasis": {"focus": "series"}}, {"name": "18-24月", "type": "bar", "stack": "total", "itemStyle": {"color": "#5CA83E"}, "data": [5, 4, 4, 3, 2, 0, 1, 2, 2, 1, 2, 6, 4, 1, 2], "emphasis": {"focus": "series"}}, {"name": "24-30月", "type": "bar", "stack": "total", "itemStyle": {"color": "#7BC256"}, "data": [0, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0], "emphasis": {"focus": "series"}}, {"name": "30-36月", "type": "bar", "stack": "total", "itemStyle": {"color": "#9BD872"}, "data": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "emphasis": {"focus": "series"}}, {"name": "36-42月", "type": "bar", "stack": "total", "itemStyle": {"color": "#B8EB90"}, "data": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "emphasis": {"focus": "series"}}, {"name": "42-48月", "type": "bar", "stack": "total", "itemStyle": {"color": "#D4F5AE"}, "data": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "emphasis": {"focus": "series"}}, {"name": "48-54月", "type": "bar", "stack": "total", "itemStyle": {"color": "#E8FCC8"}, "data": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "emphasis": {"focus": "series"}}, {"name": "54-60月", "type": "bar", "stack": "total", "itemStyle": {"color": "#F0FDE0"}, "data": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "emphasis": {"focus": "series"}}, {"name": "60月+", "type": "bar", "stack": "total", "itemStyle": {"color": "#F5FFE8"}, "data": [0, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0], "emphasis": {"focus": "series"}}];
+
+chart1.setOption({
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' },
+        formatter: function(params) {
+            var s = params[0].axisValueLabel + '<br/>';
+            var total = 0;
+            params.forEach(function(p) { total += p.value; s += p.marker + ' ' + p.seriesName + ': ' + p.value + '人<br/>'; });
+            s += '<b>合计: ' + total + '人</b>';
+            return s;
+        }
+    },
+    legend: { top: 5, type: 'scroll' },
+    grid: { left: 180, right: 40, top: 50, bottom: 30 },
+    xAxis: { type: 'value', name: '人数' },
+    yAxis: { type: 'category', data: categories, axisLabel: { width: 160, overflow: 'truncate' } },
+    series: seriesData
+});
+
+// Chart 2: KM survival curves
+var chart2 = echarts.init(document.getElementById('chart2'));
+var kmSeries = [{"name": "NX后加工-腻子批刮-A班", "type": "line", "smooth": true, "symbol": "circle", "symbolSize": 6, "data": [[0, 100.0], [6, 42.9], [12, 21.4], [18, 7.1]], "emphasis": {"focus": "series"}}, {"name": "NX后加工-外包边-C班", "type": "line", "smooth": true, "symbol": "circle", "symbolSize": 6, "data": [[0, 100.0], [6, 46.2], [12, 30.8], [18, 3.8]], "emphasis": {"focus": "series"}}, {"name": "NX后加工-外包边-B班", "type": "line", "smooth": true, "symbol": "circle", "symbolSize": 6, "data": [[0, 100.0], [6, 65.4], [12, 50.0], [18, 15.4]], "emphasis": {"focus": "series"}}, {"name": "NX后加工-腻子批刮-B班", "type": "line", "smooth": true, "symbol": "circle", "symbolSize": 6, "data": [[0, 100.0], [6, 50.0], [12, 41.7], [18, 25.0]], "emphasis": {"focus": "series"}}, {"name": "NX后加工-外包边-A班", "type": "line", "smooth": true, "symbol": "circle", "symbolSize": 6, "data": [[0, 100.0], [6, 58.3], [12, 50.0], [18, 8.3]], "emphasis": {"focus": "series"}}, {"name": "NX后加工-腻子批刮-C班", "type": "line", "smooth": true, "symbol": "circle", "symbolSize": 6, "data": [[0, 100.0], [6, 43.5], [12, 21.7], [18, 4.3]], "emphasis": {"focus": "series"}}, {"name": "生产部-NX-后道-腻子-F班", "type": "line", "smooth": true, "symbol": "circle", "symbolSize": 6, "data": [[0, 100.0], [6, 100.0], [12, 100.0], [18, 44.4], [24, 33.3], [30, 16.7], [36, 16.7], [42, 16.7], [48, 16.7], [54, 16.7], [60, 16.7], [66, 11.1], [72, 11.1], [78, 5.6], [84, 5.6], [90, 5.6]], "emphasis": {"focus": "series"}}, {"name": "NX后加工-维修-C班", "type": "line", "smooth": true, "symbol": "circle", "symbolSize": 6, "data": [[0, 100.0], [6, 78.6], [12, 71.4], [18, 14.3]], "emphasis": {"focus": "series"}}];
+
+chart2.setOption({
+    tooltip: { trigger: 'axis', formatter: function(params) {
+        var s = '入职后 ' + params[0].axisValue + ' 月<br/>';
+        params.forEach(function(p) { s += p.marker + ' ' + p.seriesName + ': ' + p.value + '%<br/>'; });
+        return s;
+    }},
+    legend: { top: 5, type: 'scroll' },
+    grid: { left: 60, right: 40, top: 50, bottom: 40 },
+    xAxis: { type: 'value', name: '入职后月数', min: 0, max: 90 },
+    yAxis: { type: 'value', name: '仍在职比例(%)', min: 0, max: 100 },
+    series: kmSeries
+});
+
+// Chart 3: Heatmap
+var chart3 = echarts.init(document.getElementById('chart3'));
+var heatData = [];
+var teamNames = ["NX后加工-装配&配重入库-A班", "NX后加工-油漆-B班", "NX后加工-油漆-A班", "NX后加工-维修-B班", "生产部-NX-后道-腻子-E班", "NX后加工-维修-A班", "NX后加工-油漆-C班", "NX后加工-维修-C班", "生产部-NX-后道-腻子-F班", "NX后加工-腻子批刮-C班", "NX后加工-外包边-A班", "NX后加工-腻子批刮-B班", "NX后加工-外包边-B班", "NX后加工-外包边-C班", "NX后加工-腻子批刮-A班"];
+var bucketNames = ["0-6月", "6-12月", "12-18月", "18-24月", "24-30月", "30-36月", "36-42月", "42-48月", "48-54月", "54-60月", "60月+"];
+var maxVal = 0;
+heatData.push([0, 0, 1]); if(1 > maxVal) maxVal = 1;
+heatData.push([1, 0, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([2, 0, 4]); if(4 > maxVal) maxVal = 4;
+heatData.push([3, 0, 5]); if(5 > maxVal) maxVal = 5;
+heatData.push([4, 0, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([5, 0, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([6, 0, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([7, 0, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([8, 0, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([9, 0, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([10, 0, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([0, 1, 1]); if(1 > maxVal) maxVal = 1;
+heatData.push([1, 1, 1]); if(1 > maxVal) maxVal = 1;
+heatData.push([2, 1, 5]); if(5 > maxVal) maxVal = 5;
+heatData.push([3, 1, 4]); if(4 > maxVal) maxVal = 4;
+heatData.push([4, 1, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([5, 1, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([6, 1, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([7, 1, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([8, 1, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([9, 1, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([10, 1, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([0, 2, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([1, 2, 2]); if(2 > maxVal) maxVal = 2;
+heatData.push([2, 2, 5]); if(5 > maxVal) maxVal = 5;
+heatData.push([3, 2, 4]); if(4 > maxVal) maxVal = 4;
+heatData.push([4, 2, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([5, 2, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([6, 2, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([7, 2, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([8, 2, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([9, 2, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([10, 2, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([0, 3, 4]); if(4 > maxVal) maxVal = 4;
+heatData.push([1, 3, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([2, 3, 4]); if(4 > maxVal) maxVal = 4;
+heatData.push([3, 3, 3]); if(3 > maxVal) maxVal = 3;
+heatData.push([4, 3, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([5, 3, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([6, 3, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([7, 3, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([8, 3, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([9, 3, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([10, 3, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([0, 4, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([1, 4, 1]); if(1 > maxVal) maxVal = 1;
+heatData.push([2, 4, 6]); if(6 > maxVal) maxVal = 6;
+heatData.push([3, 4, 2]); if(2 > maxVal) maxVal = 2;
+heatData.push([4, 4, 2]); if(2 > maxVal) maxVal = 2;
+heatData.push([5, 4, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([6, 4, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([7, 4, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([8, 4, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([9, 4, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([10, 4, 2]); if(2 > maxVal) maxVal = 2;
+heatData.push([0, 5, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([1, 5, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([2, 5, 13]); if(13 > maxVal) maxVal = 13;
+heatData.push([3, 5, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([4, 5, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([5, 5, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([6, 5, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([7, 5, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([8, 5, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([9, 5, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([10, 5, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([0, 6, 3]); if(3 > maxVal) maxVal = 3;
+heatData.push([1, 6, 5]); if(5 > maxVal) maxVal = 5;
+heatData.push([2, 6, 4]); if(4 > maxVal) maxVal = 4;
+heatData.push([3, 6, 1]); if(1 > maxVal) maxVal = 1;
+heatData.push([4, 6, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([5, 6, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([6, 6, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([7, 6, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([8, 6, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([9, 6, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([10, 6, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([0, 7, 3]); if(3 > maxVal) maxVal = 3;
+heatData.push([1, 7, 1]); if(1 > maxVal) maxVal = 1;
+heatData.push([2, 7, 8]); if(8 > maxVal) maxVal = 8;
+heatData.push([3, 7, 2]); if(2 > maxVal) maxVal = 2;
+heatData.push([4, 7, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([5, 7, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([6, 7, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([7, 7, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([8, 7, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([9, 7, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([10, 7, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([0, 8, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([1, 8, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([2, 8, 10]); if(10 > maxVal) maxVal = 10;
+heatData.push([3, 8, 2]); if(2 > maxVal) maxVal = 2;
+heatData.push([4, 8, 3]); if(3 > maxVal) maxVal = 3;
+heatData.push([5, 8, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([6, 8, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([7, 8, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([8, 8, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([9, 8, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([10, 8, 3]); if(3 > maxVal) maxVal = 3;
+heatData.push([0, 9, 13]); if(13 > maxVal) maxVal = 13;
+heatData.push([1, 9, 5]); if(5 > maxVal) maxVal = 5;
+heatData.push([2, 9, 4]); if(4 > maxVal) maxVal = 4;
+heatData.push([3, 9, 1]); if(1 > maxVal) maxVal = 1;
+heatData.push([4, 9, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([5, 9, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([6, 9, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([7, 9, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([8, 9, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([9, 9, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([10, 9, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([0, 10, 10]); if(10 > maxVal) maxVal = 10;
+heatData.push([1, 10, 2]); if(2 > maxVal) maxVal = 2;
+heatData.push([2, 10, 10]); if(10 > maxVal) maxVal = 10;
+heatData.push([3, 10, 2]); if(2 > maxVal) maxVal = 2;
+heatData.push([4, 10, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([5, 10, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([6, 10, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([7, 10, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([8, 10, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([9, 10, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([10, 10, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([0, 11, 12]); if(12 > maxVal) maxVal = 12;
+heatData.push([1, 11, 2]); if(2 > maxVal) maxVal = 2;
+heatData.push([2, 11, 4]); if(4 > maxVal) maxVal = 4;
+heatData.push([3, 11, 6]); if(6 > maxVal) maxVal = 6;
+heatData.push([4, 11, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([5, 11, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([6, 11, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([7, 11, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([8, 11, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([9, 11, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([10, 11, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([0, 12, 9]); if(9 > maxVal) maxVal = 9;
+heatData.push([1, 12, 4]); if(4 > maxVal) maxVal = 4;
+heatData.push([2, 12, 9]); if(9 > maxVal) maxVal = 9;
+heatData.push([3, 12, 4]); if(4 > maxVal) maxVal = 4;
+heatData.push([4, 12, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([5, 12, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([6, 12, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([7, 12, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([8, 12, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([9, 12, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([10, 12, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([0, 13, 14]); if(14 > maxVal) maxVal = 14;
+heatData.push([1, 13, 4]); if(4 > maxVal) maxVal = 4;
+heatData.push([2, 13, 7]); if(7 > maxVal) maxVal = 7;
+heatData.push([3, 13, 1]); if(1 > maxVal) maxVal = 1;
+heatData.push([4, 13, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([5, 13, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([6, 13, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([7, 13, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([8, 13, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([9, 13, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([10, 13, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([0, 14, 16]); if(16 > maxVal) maxVal = 16;
+heatData.push([1, 14, 6]); if(6 > maxVal) maxVal = 6;
+heatData.push([2, 14, 4]); if(4 > maxVal) maxVal = 4;
+heatData.push([3, 14, 2]); if(2 > maxVal) maxVal = 2;
+heatData.push([4, 14, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([5, 14, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([6, 14, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([7, 14, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([8, 14, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([9, 14, 0]); if(0 > maxVal) maxVal = 0;
+heatData.push([10, 14, 0]); if(0 > maxVal) maxVal = 0;
+
+chart3.setOption({
+    tooltip: { formatter: function(p) { return p.data[2] > 0 ? teamNames[p.data[1]] + ' / ' + bucketNames[p.data[0]] + ': ' + p.data[2] + '人' : ''; } },
+    grid: { left: 180, right: 60, top: 40, bottom: 80 },
+    xAxis: { type: 'category', data: bucketNames, splitArea: { show: true }, axisLabel: { rotate: 30 } },
+    yAxis: { type: 'category', data: teamNames, splitArea: { show: true }, axisLabel: { width: 160, overflow: 'truncate' } },
+    visualMap: { min: 0, max: maxVal, calculable: true, orient: 'horizontal', left: 'center', bottom: 0,
+        inRange: { color: ['#F5FFE8','#E8FCC8','#D4F5AE','#B8EB90','#9BD872','#7BC256','#5CA83E','#4A8B2C','#3A6B1E','#2D5016'] }
+    },
+    series: [{ type: 'heatmap', data: heatData, label: { show: true }, emphasis: { itemStyle: { shadowBlur: 10, shadowColor: 'rgba(0,0,0,0.5)' } } }]
+});
+
+window.addEventListener('resize', function() { chart1.resize(); chart2.resize(); chart3.resize(); });
+</script>
+</body>
+</html>
