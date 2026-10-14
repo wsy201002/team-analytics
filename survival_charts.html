@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>班组生存分析</title>
+<style>
+body { font-family: -apple-system, "Microsoft YaHei", sans-serif; margin: 0; padding: 20px; background: #f5f9f0; }
+.container { max-width: 1200px; margin: 0 auto; }
+h1 { text-align: center; color: #2D5016; margin: 0 0 5px; }
+.subtitle { text-align: center; color: #666; font-size: 14px; margin-bottom: 20px; }
+.card { background: white; border-radius: 10px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+h2 { color: #3A6B1E; margin: 0 0 15px; font-size: 16px; border-left: 4px solid #5CA83E; padding-left: 10px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { background: #E8FCC8; color: #2D5016; padding: 8px 6px; text-align: center; border: 1px solid #d0dcc0; }
+td { padding: 6px; text-align: center; border: 1px solid #e8e8e8; }
+td:first-child { text-align: left; font-weight: 500; }
+.bar-container { display: flex; width: 100%; height: 24px; border-radius: 4px; overflow: hidden; }
+.bar-segment { height: 100%; display: flex; align-items: center; justify-content: center; font-size: 10px; color: inherit; min-width: 0; }
+.legend { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px; justify-content: center; }
+.legend-item { display: flex; align-items: center; gap: 4px; font-size: 12px; color: #555; }
+.legend-dot { width: 12px; height: 12px; border-radius: 2px; }
+.bar-row { display: flex; align-items: center; margin-bottom: 4px; }
+.bar-label { width: 200px; text-align: right; padding-right: 10px; font-size: 12px; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bar-track { flex: 1; height: 22px; }
+.bar-total { width: 50px; text-align: center; font-size: 12px; color: #666; flex-shrink: 0; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>班组人员生存分析</h1>
+<p class="subtitle">分析日期：2026年10月14日 | 总员工：367人 | 班组数：36</p>
+
+<div class="card">
+<h2>图例</h2>
+<div class="legend">
+
+<div class="legend-item"><div class="legend-dot" style="background:#2D5016"></div>0-6月</div>
+<div class="legend-item"><div class="legend-dot" style="background:#3A6B1E"></div>6-12月</div>
+<div class="legend-item"><div class="legend-dot" style="background:#4A8B2C"></div>12-18月</div>
+<div class="legend-item"><div class="legend-dot" style="background:#5CA83E"></div>18-24月</div>
+<div class="legend-item"><div class="legend-dot" style="background:#7BC256"></div>24-30月</div>
+<div class="legend-item"><div class="legend-dot" style="background:#9BD872"></div>30-36月</div>
+<div class="legend-item"><div class="legend-dot" style="background:#B8EB90"></div>36-42月</div>
+<div class="legend-item"><div class="legend-dot" style="background:#D4F5AE"></div>42-48月</div>
+<div class="legend-item"><div class="legend-dot" style="background:#E8FCC8"></div>48-54月</div>
+<div class="legend-item"><div class="legend-dot" style="background:#F0FDE0"></div>54-60月</div>
+<div class="legend-item"><div class="legend-dot" style="background:#F5FFE8"></div>60月+</div>
+</div></div>
+
+<div class="card">
+<h2>班组人员 Tenure 分布（全部班组）</h2>
+<div style="padding: 0 5px;">
+
+<div class="bar-row"><div class="bar-label" title="NX后加工-腻子批刮-A班">NX后加工-腻子批刮-A班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:57.1%;background:#2D5016;color:#fff">16</div><div class="bar-segment" style="width:21.4%;background:#3A6B1E;color:#fff">6</div><div class="bar-segment" style="width:14.3%;background:#4A8B2C;color:#fff">4</div><div class="bar-segment" style="width:7.1%;background:#5CA83E;color:#fff">2</div></div></div><div class="bar-total">28人</div></div>
+<div class="bar-row"><div class="bar-label" title="NX后加工-外包边-C班">NX后加工-外包边-C班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:53.8%;background:#2D5016;color:#fff">14</div><div class="bar-segment" style="width:15.4%;background:#3A6B1E;color:#fff">4</div><div class="bar-segment" style="width:26.9%;background:#4A8B2C;color:#fff">7</div><div class="bar-segment" style="width:3.8%;background:#5CA83E;color:#fff">1</div></div></div><div class="bar-total">26人</div></div>
+<div class="bar-row"><div class="bar-label" title="NX后加工-外包边-B班">NX后加工-外包边-B班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:34.6%;background:#2D5016;color:#fff">9</div><div class="bar-segment" style="width:15.4%;background:#3A6B1E;color:#fff">4</div><div class="bar-segment" style="width:34.6%;background:#4A8B2C;color:#fff">9</div><div class="bar-segment" style="width:15.4%;background:#5CA83E;color:#fff">4</div></div></div><div class="bar-total">26人</div></div>
+<div class="bar-row"><div class="bar-label" title="NX后加工-腻子批刮-B班">NX后加工-腻子批刮-B班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:50.0%;background:#2D5016;color:#fff">12</div><div class="bar-segment" style="width:8.3%;background:#3A6B1E;color:#fff">2</div><div class="bar-segment" style="width:16.7%;background:#4A8B2C;color:#fff">4</div><div class="bar-segment" style="width:25.0%;background:#5CA83E;color:#fff">6</div></div></div><div class="bar-total">24人</div></div>
+<div class="bar-row"><div class="bar-label" title="NX后加工-外包边-A班">NX后加工-外包边-A班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:41.7%;background:#2D5016;color:#fff">10</div><div class="bar-segment" style="width:8.3%;background:#3A6B1E;color:#fff">2</div><div class="bar-segment" style="width:41.7%;background:#4A8B2C;color:#fff">10</div><div class="bar-segment" style="width:8.3%;background:#5CA83E;color:#fff">2</div></div></div><div class="bar-total">24人</div></div>
+<div class="bar-row"><div class="bar-label" title="NX后加工-腻子批刮-C班">NX后加工-腻子批刮-C班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:56.5%;background:#2D5016;color:#fff">13</div><div class="bar-segment" style="width:21.7%;background:#3A6B1E;color:#fff">5</div><div class="bar-segment" style="width:17.4%;background:#4A8B2C;color:#fff">4</div><div class="bar-segment" style="width:4.3%;background:#5CA83E;color:#fff">1</div></div></div><div class="bar-total">23人</div></div>
+<div class="bar-row"><div class="bar-label" title="生产部-NX-后道-腻子-F班">生产部-NX-后道-腻子-F班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:55.6%;background:#4A8B2C;color:#fff">10</div><div class="bar-segment" style="width:11.1%;background:#5CA83E;color:#fff">2</div><div class="bar-segment" style="width:16.7%;background:#7BC256;color:#333">3</div><div class="bar-segment" style="width:16.7%;background:#F5FFE8;color:#333">3</div></div></div><div class="bar-total">18人</div></div>
+<div class="bar-row"><div class="bar-label" title="NX后加工-维修-C班">NX后加工-维修-C班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:21.4%;background:#2D5016;color:#fff">3</div><div class="bar-segment" style="width:7.1%;background:#3A6B1E;color:#fff">1</div><div class="bar-segment" style="width:57.1%;background:#4A8B2C;color:#fff">8</div><div class="bar-segment" style="width:14.3%;background:#5CA83E;color:#fff">2</div></div></div><div class="bar-total">14人</div></div>
+<div class="bar-row"><div class="bar-label" title="NX后加工-油漆-C班">NX后加工-油漆-C班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:23.1%;background:#2D5016;color:#fff">3</div><div class="bar-segment" style="width:38.5%;background:#3A6B1E;color:#fff">5</div><div class="bar-segment" style="width:30.8%;background:#4A8B2C;color:#fff">4</div><div class="bar-segment" style="width:7.7%;background:#5CA83E;color:#fff">1</div></div></div><div class="bar-total">13人</div></div>
+<div class="bar-row"><div class="bar-label" title="NX后加工-维修-A班">NX后加工-维修-A班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:100.0%;background:#4A8B2C;color:#fff">13</div></div></div><div class="bar-total">13人</div></div>
+<div class="bar-row"><div class="bar-label" title="生产部-NX-后道-腻子-E班">生产部-NX-后道-腻子-E班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:7.7%;background:#3A6B1E;color:#fff">1</div><div class="bar-segment" style="width:46.2%;background:#4A8B2C;color:#fff">6</div><div class="bar-segment" style="width:15.4%;background:#5CA83E;color:#fff">2</div><div class="bar-segment" style="width:15.4%;background:#7BC256;color:#333">2</div><div class="bar-segment" style="width:15.4%;background:#F5FFE8;color:#333">2</div></div></div><div class="bar-total">13人</div></div>
+<div class="bar-row"><div class="bar-label" title="NX后加工-维修-B班">NX后加工-维修-B班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:36.4%;background:#2D5016;color:#fff">4</div><div class="bar-segment" style="width:36.4%;background:#4A8B2C;color:#fff">4</div><div class="bar-segment" style="width:27.3%;background:#5CA83E;color:#fff">3</div></div></div><div class="bar-total">11人</div></div>
+<div class="bar-row"><div class="bar-label" title="NX后加工-油漆-A班">NX后加工-油漆-A班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:18.2%;background:#3A6B1E;color:#fff">2</div><div class="bar-segment" style="width:45.5%;background:#4A8B2C;color:#fff">5</div><div class="bar-segment" style="width:36.4%;background:#5CA83E;color:#fff">4</div></div></div><div class="bar-total">11人</div></div>
+<div class="bar-row"><div class="bar-label" title="NX后加工-油漆-B班">NX后加工-油漆-B班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:9.1%;background:#2D5016;color:#fff">1</div><div class="bar-segment" style="width:9.1%;background:#3A6B1E;color:#fff">1</div><div class="bar-segment" style="width:45.5%;background:#4A8B2C;color:#fff">5</div><div class="bar-segment" style="width:36.4%;background:#5CA83E;color:#fff">4</div></div></div><div class="bar-total">11人</div></div>
+<div class="bar-row"><div class="bar-label" title="NX后加工-装配&配重入库-A班">NX后加工-装配&配重入库-A班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:10.0%;background:#2D5016;color:#fff">1</div><div class="bar-segment" style="width:40.0%;background:#4A8B2C;color:#fff">4</div><div class="bar-segment" style="width:50.0%;background:#5CA83E;color:#fff">5</div></div></div><div class="bar-total">10人</div></div>
+<div class="bar-row"><div class="bar-label" title="NX后加工-装配&配重入库-E班">NX后加工-装配&配重入库-E班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:55.6%;background:#4A8B2C;color:#fff">5</div><div class="bar-segment" style="width:11.1%;background:#5CA83E;color:#fff">1</div><div class="bar-segment" style="width:11.1%;background:#D4F5AE;color:#333">1</div><div class="bar-segment" style="width:22.2%;background:#F5FFE8;color:#333">2</div></div></div><div class="bar-total">9人</div></div>
+<div class="bar-row"><div class="bar-label" title="NX后加工-装配&配重入库-B班">NX后加工-装配&配重入库-B班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:22.2%;background:#2D5016;color:#fff">2</div><div class="bar-segment" style="width:44.4%;background:#4A8B2C;color:#fff">4</div><div class="bar-segment" style="width:33.3%;background:#5CA83E;color:#fff">3</div></div></div><div class="bar-total">9人</div></div>
+<div class="bar-row"><div class="bar-label" title="生产部-NX-后道-V1 维修-B班">生产部-NX-后道-V1 维修-B班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:75.0%;background:#2D5016;color:#fff">6</div><div class="bar-segment" style="width:12.5%;background:#4A8B2C;color:#fff">1</div><div class="bar-segment" style="width:12.5%;background:#5CA83E;color:#fff">1</div></div></div><div class="bar-total">8人</div></div>
+<div class="bar-row"><div class="bar-label" title="NX后加工-装配&配重入库-C班">NX后加工-装配&配重入库-C班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:25.0%;background:#2D5016;color:#fff">2</div><div class="bar-segment" style="width:37.5%;background:#3A6B1E;color:#fff">3</div><div class="bar-segment" style="width:25.0%;background:#4A8B2C;color:#fff">2</div><div class="bar-segment" style="width:12.5%;background:#5CA83E;color:#fff">1</div></div></div><div class="bar-total">8人</div></div>
+<div class="bar-row"><div class="bar-label" title="生产部-NX-后道-V1 维修-A班">生产部-NX-后道-V1 维修-A班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:42.9%;background:#2D5016;color:#fff">3</div><div class="bar-segment" style="width:28.6%;background:#4A8B2C;color:#fff">2</div><div class="bar-segment" style="width:28.6%;background:#5CA83E;color:#fff">2</div></div></div><div class="bar-total">7人</div></div>
+<div class="bar-row"><div class="bar-label" title="NX后加工-外包边-E班">NX后加工-外包边-E班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:33.3%;background:#5CA83E;color:#fff">2</div><div class="bar-segment" style="width:33.3%;background:#7BC256;color:#333">2</div><div class="bar-segment" style="width:16.7%;background:#D4F5AE;color:#333">1</div><div class="bar-segment" style="width:16.7%;background:#F0FDE0;color:#333">1</div></div></div><div class="bar-total">6人</div></div>
+<div class="bar-row"><div class="bar-label" title="生产部-NX-后道-包边-F班">生产部-NX-后道-包边-F班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:50.0%;background:#7BC256;color:#333">3</div><div class="bar-segment" style="width:33.3%;background:#B8EB90;color:#333">2</div><div class="bar-segment" style="width:16.7%;background:#F5FFE8;color:#333">1</div></div></div><div class="bar-total">6人</div></div>
+<div class="bar-row"><div class="bar-label" title="NX后加工-装配&配重入库-F班">NX后加工-装配&配重入库-F班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:33.3%;background:#4A8B2C;color:#fff">2</div><div class="bar-segment" style="width:16.7%;background:#5CA83E;color:#fff">1</div><div class="bar-segment" style="width:16.7%;background:#D4F5AE;color:#333">1</div><div class="bar-segment" style="width:16.7%;background:#E8FCC8;color:#333">1</div><div class="bar-segment" style="width:16.7%;background:#F5FFE8;color:#333">1</div></div></div><div class="bar-total">6人</div></div>
+<div class="bar-row"><div class="bar-label" title="NX后加工-维修-F班">NX后加工-维修-F班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:40.0%;background:#7BC256;color:#333">2</div><div class="bar-segment" style="width:20.0%;background:#D4F5AE;color:#333">1</div><div class="bar-segment" style="width:40.0%;background:#F5FFE8;color:#333">2</div></div></div><div class="bar-total">5人</div></div>
+<div class="bar-row"><div class="bar-label" title="生产部-NX-后道-行车-C班">生产部-NX-后道-行车-C班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:100.0%;background:#4A8B2C;color:#fff">5</div></div></div><div class="bar-total">5人</div></div>
+<div class="bar-row"><div class="bar-label" title="生产部-NX-后道-V1 维修-F班">生产部-NX-后道-V1 维修-F班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:60.0%;background:#4A8B2C;color:#fff">3</div><div class="bar-segment" style="width:20.0%;background:#B8EB90;color:#333">1</div><div class="bar-segment" style="width:20.0%;background:#E8FCC8;color:#333">1</div></div></div><div class="bar-total">5人</div></div>
+<div class="bar-row"><div class="bar-label" title="生产部-NX-后道-行车-B班">生产部-NX-后道-行车-B班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:40.0%;background:#4A8B2C;color:#fff">2</div><div class="bar-segment" style="width:60.0%;background:#5CA83E;color:#fff">3</div></div></div><div class="bar-total">5人</div></div>
+<div class="bar-row"><div class="bar-label" title="生产部-NX-后道-V1 维修-C班">生产部-NX-后道-V1 维修-C班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:80.0%;background:#2D5016;color:#fff">4</div><div class="bar-segment" style="width:20.0%;background:#3A6B1E;color:#fff">1</div></div></div><div class="bar-total">5人</div></div>
+<div class="bar-row"><div class="bar-label" title="生产部-NX-后道-行车-A班">生产部-NX-后道-行车-A班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:60.0%;background:#4A8B2C;color:#fff">3</div><div class="bar-segment" style="width:40.0%;background:#5CA83E;color:#fff">2</div></div></div><div class="bar-total">5人</div></div>
+<div class="bar-row"><div class="bar-label" title="生产部-NX-后道-V1 维修-E班">生产部-NX-后道-V1 维修-E班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:75.0%;background:#4A8B2C;color:#fff">3</div><div class="bar-segment" style="width:25.0%;background:#E8FCC8;color:#333">1</div></div></div><div class="bar-total">4人</div></div>
+<div class="bar-row"><div class="bar-label" title="NX后加工-维修-E班">NX后加工-维修-E班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:33.3%;background:#4A8B2C;color:#fff">1</div><div class="bar-segment" style="width:33.3%;background:#D4F5AE;color:#333">1</div><div class="bar-segment" style="width:33.3%;background:#F5FFE8;color:#333">1</div></div></div><div class="bar-total">3人</div></div>
+<div class="bar-row"><div class="bar-label" title="生产部-NX-后道">生产部-NX-后道</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:50.0%;background:#3A6B1E;color:#fff">1</div><div class="bar-segment" style="width:50.0%;background:#F5FFE8;color:#333">1</div></div></div><div class="bar-total">2人</div></div>
+<div class="bar-row"><div class="bar-label" title="NX后加工-切割-C1班">NX后加工-切割-C1班</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:100.0%;background:#3A6B1E;color:#fff">1</div></div></div><div class="bar-total">1人</div></div>
+<div class="bar-row"><div class="bar-label" title="生产部-NX-后道-维修">生产部-NX-后道-维修</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:100.0%;background:#F5FFE8;color:#333">1</div></div></div><div class="bar-total">1人</div></div>
+<div class="bar-row"><div class="bar-label" title="生产部-NX-后道-油漆前">生产部-NX-后道-油漆前</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:100.0%;background:#F5FFE8;color:#333">1</div></div></div><div class="bar-total">1人</div></div>
+<div class="bar-row"><div class="bar-label" title="生产部-NX-后道-油漆后">生产部-NX-后道-油漆后</div><div class="bar-track"><div class="bar-container"><div class="bar-segment" style="width:100.0%;background:#3A6B1E;color:#fff">1</div></div></div><div class="bar-total">1人</div></div>
+</div></div>
+
+<div class="card">
+<h2>班组统计摘要表</h2>
+<table>
+<tr><th>班组</th><th>总人数</th><th>中位入职月数</th><th>0-6月占比</th><th>6-12月占比</th><th>12-18月占比</th><th>18-24月占比</th><th>24月+占比</th></tr>
+
+<tr><td>NX后加工-腻子批刮-A班</td><td>28</td><td>2月</td><td>16(57%)</td><td>6(21%)</td><td>4(14%)</td><td>2(7%)</td><td>0(0%)</td></tr>
+<tr><td>NX后加工-外包边-C班</td><td>26</td><td>5月</td><td>14(54%)</td><td>4(15%)</td><td>7(27%)</td><td>1(4%)</td><td>0(0%)</td></tr>
+<tr><td>NX后加工-外包边-B班</td><td>26</td><td>12月</td><td>9(35%)</td><td>4(15%)</td><td>9(35%)</td><td>4(15%)</td><td>0(0%)</td></tr>
+<tr><td>NX后加工-腻子批刮-B班</td><td>24</td><td>9月</td><td>12(50%)</td><td>2(8%)</td><td>4(17%)</td><td>6(25%)</td><td>0(0%)</td></tr>
+<tr><td>NX后加工-外包边-A班</td><td>24</td><td>13月</td><td>10(42%)</td><td>2(8%)</td><td>10(42%)</td><td>2(8%)</td><td>0(0%)</td></tr>
+<tr><td>NX后加工-腻子批刮-C班</td><td>23</td><td>3月</td><td>13(57%)</td><td>5(22%)</td><td>4(17%)</td><td>1(4%)</td><td>0(0%)</td></tr>
+<tr><td>生产部-NX-后道-腻子-F班</td><td>18</td><td>17月</td><td>0(0%)</td><td>0(0%)</td><td>10(56%)</td><td>2(11%)</td><td>6(33%)</td></tr>
+<tr><td>NX后加工-维修-C班</td><td>14</td><td>14月</td><td>3(21%)</td><td>1(7%)</td><td>8(57%)</td><td>2(14%)</td><td>0(0%)</td></tr>
+<tr><td>NX后加工-油漆-C班</td><td>13</td><td>10月</td><td>3(23%)</td><td>5(38%)</td><td>4(31%)</td><td>1(8%)</td><td>0(0%)</td></tr>
+<tr><td>NX后加工-维修-A班</td><td>13</td><td>16月</td><td>0(0%)</td><td>0(0%)</td><td>13(100%)</td><td>0(0%)</td><td>0(0%)</td></tr>
+<tr><td>生产部-NX-后道-腻子-E班</td><td>13</td><td>16月</td><td>0(0%)</td><td>1(8%)</td><td>6(46%)</td><td>2(15%)</td><td>4(31%)</td></tr>
+<tr><td>NX后加工-维修-B班</td><td>11</td><td>16月</td><td>4(36%)</td><td>0(0%)</td><td>4(36%)</td><td>3(27%)</td><td>0(0%)</td></tr>
+<tr><td>NX后加工-油漆-A班</td><td>11</td><td>17月</td><td>0(0%)</td><td>2(18%)</td><td>5(45%)</td><td>4(36%)</td><td>0(0%)</td></tr>
+<tr><td>NX后加工-油漆-B班</td><td>11</td><td>15月</td><td>1(9%)</td><td>1(9%)</td><td>5(45%)</td><td>4(36%)</td><td>0(0%)</td></tr>
+<tr><td>NX后加工-装配&配重入库-A班</td><td>10</td><td>18月</td><td>1(10%)</td><td>0(0%)</td><td>4(40%)</td><td>5(50%)</td><td>0(0%)</td></tr>
+<tr><td>NX后加工-装配&配重入库-E班</td><td>9</td><td>16月</td><td>0(0%)</td><td>0(0%)</td><td>5(56%)</td><td>1(11%)</td><td>3(33%)</td></tr>
+<tr><td>NX后加工-装配&配重入库-B班</td><td>9</td><td>15月</td><td>2(22%)</td><td>0(0%)</td><td>4(44%)</td><td>3(33%)</td><td>0(0%)</td></tr>
+<tr><td>生产部-NX-后道-V1 维修-B班</td><td>8</td><td>2月</td><td>6(75%)</td><td>0(0%)</td><td>1(12%)</td><td>1(12%)</td><td>0(0%)</td></tr>
+<tr><td>NX后加工-装配&配重入库-C班</td><td>8</td><td>10月</td><td>2(25%)</td><td>3(38%)</td><td>2(25%)</td><td>1(12%)</td><td>0(0%)</td></tr>
+<tr><td>生产部-NX-后道-V1 维修-A班</td><td>7</td><td>14月</td><td>3(43%)</td><td>0(0%)</td><td>2(29%)</td><td>2(29%)</td><td>0(0%)</td></tr>
+<tr><td>NX后加工-外包边-E班</td><td>6</td><td>29月</td><td>0(0%)</td><td>0(0%)</td><td>0(0%)</td><td>2(33%)</td><td>4(67%)</td></tr>
+<tr><td>生产部-NX-后道-包边-F班</td><td>6</td><td>40月</td><td>0(0%)</td><td>0(0%)</td><td>0(0%)</td><td>0(0%)</td><td>6(100%)</td></tr>
+<tr><td>NX后加工-装配&配重入库-F班</td><td>6</td><td>43月</td><td>0(0%)</td><td>0(0%)</td><td>2(33%)</td><td>1(17%)</td><td>3(50%)</td></tr>
+<tr><td>NX后加工-维修-F班</td><td>5</td><td>44月</td><td>0(0%)</td><td>0(0%)</td><td>0(0%)</td><td>0(0%)</td><td>5(100%)</td></tr>
+<tr><td>生产部-NX-后道-行车-C班</td><td>5</td><td>14月</td><td>0(0%)</td><td>0(0%)</td><td>5(100%)</td><td>0(0%)</td><td>0(0%)</td></tr>
+<tr><td>生产部-NX-后道-V1 维修-F班</td><td>5</td><td>17月</td><td>0(0%)</td><td>0(0%)</td><td>3(60%)</td><td>0(0%)</td><td>2(40%)</td></tr>
+<tr><td>生产部-NX-后道-行车-B班</td><td>5</td><td>18月</td><td>0(0%)</td><td>0(0%)</td><td>2(40%)</td><td>3(60%)</td><td>0(0%)</td></tr>
+<tr><td>生产部-NX-后道-V1 维修-C班</td><td>5</td><td>2月</td><td>4(80%)</td><td>1(20%)</td><td>0(0%)</td><td>0(0%)</td><td>0(0%)</td></tr>
+<tr><td>生产部-NX-后道-行车-A班</td><td>5</td><td>17月</td><td>0(0%)</td><td>0(0%)</td><td>3(60%)</td><td>2(40%)</td><td>0(0%)</td></tr>
+<tr><td>生产部-NX-后道-V1 维修-E班</td><td>4</td><td>16月</td><td>0(0%)</td><td>0(0%)</td><td>3(75%)</td><td>0(0%)</td><td>1(25%)</td></tr>
+<tr><td>NX后加工-维修-E班</td><td>3</td><td>42月</td><td>0(0%)</td><td>0(0%)</td><td>1(33%)</td><td>0(0%)</td><td>2(67%)</td></tr>
+<tr><td>生产部-NX-后道</td><td>2</td><td>149月</td><td>0(0%)</td><td>1(50%)</td><td>0(0%)</td><td>0(0%)</td><td>1(50%)</td></tr>
+<tr><td>NX后加工-切割-C1班</td><td>1</td><td>11月</td><td>0(0%)</td><td>1(100%)</td><td>0(0%)</td><td>0(0%)</td><td>0(0%)</td></tr>
+<tr><td>生产部-NX-后道-维修</td><td>1</td><td>99月</td><td>0(0%)</td><td>0(0%)</td><td>0(0%)</td><td>0(0%)</td><td>1(100%)</td></tr>
+<tr><td>生产部-NX-后道-油漆前</td><td>1</td><td>218月</td><td>0(0%)</td><td>0(0%)</td><td>0(0%)</td><td>0(0%)</td><td>1(100%)</td></tr>
+<tr><td>生产部-NX-后道-油漆后</td><td>1</td><td>11月</td><td>0(0%)</td><td>1(100%)</td><td>0(0%)</td><td>0(0%)</td><td>0(0%)</td></tr>
+</table></div>
+
+<div style="text-align:center;color:#888;font-size:12px;margin-top:20px;">
+生成时间：2026-10-14 10:57:29 | Hermes Agent
+</div>
+</div>
+</body>
+</html>
